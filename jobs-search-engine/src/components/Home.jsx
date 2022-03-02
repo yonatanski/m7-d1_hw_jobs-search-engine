@@ -52,7 +52,7 @@ export default function Home() {
     <Container>
       <Row>
         <Col xs={12}>
-          <h3>STRIVE JOB SEARCHING PLATFORM</h3>
+          <h3>STRIVE- JOB SEARCHING- PLATFORM</h3>
           <Form onSubmit={handleSubmit}>
             <FormControl type="text" placeholder="Search" className=" mr-sm-2" value={query} onChange={handelChange} />
             <Button className="mt-3" type="submit">
