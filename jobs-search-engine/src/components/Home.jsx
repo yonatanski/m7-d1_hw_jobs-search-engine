@@ -1,7 +1,9 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import { Form, Button, FormControl, Container, Row, Col } from "react-bootstrap"
-import JobResults from "./JobResults"
+import { Link } from "react-router-dom"
+import uniqid from "uniqid"
+import Job from "./Job"
 
 export default function Home() {
   const [job, setJob] = useState([])
@@ -59,14 +61,20 @@ export default function Home() {
           </Form>
           {/* <JobResults fecthedJobs={job} /> */}
         </Col>
-        <Col>
-          {job.map((job) => {
-            return (
-              <div>
-                {job.company_name}and {job.title}
-              </div>
-            )
-          })}
+        <Col xs={10} className="mx-auto">
+          <Col>
+            {job.map((jobData) => (
+              <Job key={uniqid()} data={jobData} />
+            ))}
+
+            {/* // return (
+            //   <Row>
+            //     <Col>{job.title}</Col>
+            //     <Link to={`/${job.company_name}`}>
+            //       <Col>{job.company_name}</Col>
+            //     </Link>
+            //   </Row> */}
+          </Col>
         </Col>
       </Row>
     </Container>

@@ -1,16 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "./App.css"
 import Home from "./components/Home"
-import JobResults from "./components/JobResults"
+import CompanySearchResults from "./components/CompanySearchResults"
 
 function App() {
   return (
-    <Router>
-      <Home />
+    <BrowserRouter>
       <Routes>
-        <Route path="/jobs" element={<JobResults />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/:companyName" element={<CompanySearchResults />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 
