@@ -53,6 +53,9 @@ export default function Home() {
       <Row>
         <Col xs={12}>
           <h3>STRIVE- JOB SEARCHING- PLATFORM</h3>
+          <Link to="/favourites" className="btn btn-primary">
+            Favourites
+          </Link>
           <Form onSubmit={handleSubmit}>
             <FormControl type="text" placeholder="Search" className=" mr-sm-2" value={query} onChange={handelChange} />
             <Button className="mt-3" type="submit">
