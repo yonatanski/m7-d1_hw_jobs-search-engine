@@ -3,9 +3,14 @@ import { useEffect, useState } from "react"
 import { Form, Button, FormControl, Container, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import uniqid from "uniqid"
+import { connect } from "react-redux"
 import Job from "./Job"
 
-export default function Home() {
+const mapStateToProps = (state) => ({
+  count: state.favourites.length,
+})
+
+function Home({ count }) {
   const [job, setJob] = useState([])
   const [query, setQuery] = useState("")
 
@@ -52,10 +57,11 @@ export default function Home() {
     <Container>
       <Row>
         <Col xs={12}>
-          <h3>STRIVE- JOB SEARCHING- PLATFORM</h3>
-          <Link to="/favourites" className="btn btn-primary">
-            Favourites
+          <h3 className="text-center mt-3">STRIVE- JOB SEARCHING- PLATFORM</h3>
+          <Link to="/favourites" className="btn btn-primary mb-2">
+            Favourites <span className="text-danger">{count}</span>
           </Link>
+
           <Form onSubmit={handleSubmit}>
             <FormControl type="text" placeholder="Search" className=" mr-sm-2" value={query} onChange={handelChange} />
             <Button className="mt-3" type="submit">
@@ -75,3 +81,4 @@ export default function Home() {
     </Container>
   )
 }
+export default connect(mapStateToProps)(Home)
