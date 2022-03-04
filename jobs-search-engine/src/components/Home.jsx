@@ -66,14 +66,6 @@ export default function Home() {
             {job.map((jobData) => (
               <Job key={uniqid()} data={jobData} />
             ))}
-
-            {/* // return (
-            //   <Row>
-            //     <Col>{job.title}</Col>
-            //     <Link to={`/${job.company_name}`}>
-            //       <Col>{job.company_name}</Col>
-            //     </Link>
-            //   </Row> */}
           </Col>
         </Col>
       </Row>
