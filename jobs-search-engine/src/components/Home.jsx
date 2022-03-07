@@ -1,6 +1,6 @@
 import React from "react"
 import { useEffect, useState } from "react"
-import { Form, Button, FormControl, Container, Row, Col } from "react-bootstrap"
+import { Form, Button, FormControl, Container, Row, Col, Spinner } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import uniqid from "uniqid"
 import { connect } from "react-redux"
@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
 
 function Home({ count }) {
   const [job, setJob] = useState([])
+  const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState("")
 
   //   useEffect(() => {
@@ -47,6 +48,7 @@ function Home({ count }) {
         console.log("jsoneddd", jobdata.data)
 
         setJob(jobdata.data)
+        setLoading(false)
       }
       console.log("state after setjobed", job)
     } catch (error) {
@@ -56,27 +58,33 @@ function Home({ count }) {
   return (
     <Container>
       <Row>
-        <Col xs={12}>
+        <Col xs={8}>
           <h3 className="text-center mt-3">STRIVE- JOB SEARCHING- PLATFORM</h3>
           <Link to="/favourites" className="btn btn-primary mb-2">
             Favourites <span className="text-danger">{count}</span>
           </Link>
 
           <Form onSubmit={handleSubmit}>
-            <FormControl type="text" placeholder="Search" className=" mr-sm-2" value={query} onChange={handelChange} />
+            <FormControl type="text" placeholder="Search" className=" mr-sm-2 " value={query} onChange={handelChange} />
             <Button className="mt-3" type="submit">
               Search
             </Button>
           </Form>
           {/* <JobResults fecthedJobs={job} /> */}
         </Col>
-        <Col xs={10} className="mx-auto">
-          <Col>
-            {job.map((jobData) => (
-              <Job key={uniqid()} data={jobData} />
-            ))}
+        {loading ? (
+          <Col xs={12}>
+            <Spinner animation="grow" className="text-center mt-3" />
           </Col>
-        </Col>
+        ) : (
+          <Col xs={10} className="mx-auto">
+            <Col>
+              {job.map((jobData) => (
+                <Job key={uniqid()} data={jobData} />
+              ))}
+            </Col>
+          </Col>
+        )}
       </Row>
     </Container>
   )
